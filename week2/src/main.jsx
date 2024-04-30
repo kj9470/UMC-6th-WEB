@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './practice_1st'
+import Prac1 from './practice_1st'
+import Prac2 from './practice_2nd'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <Prac1 />
+    <Prac2 />
   </React.StrictMode>,
 )
