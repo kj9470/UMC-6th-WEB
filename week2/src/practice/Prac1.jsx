@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { useState } from "react"
 
-function App() {
+function Prac1() {
 
   const [num, setNum] = useState(0);
 
@@ -28,4 +28,4 @@ function App() {
   )
 }
 
-export default App
+export default Prac1
