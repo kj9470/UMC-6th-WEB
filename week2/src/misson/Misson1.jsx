@@ -1,11 +1,11 @@
 // TodoList.jsx
 import React, { useState } from 'react';
-import InputBox from '..components/InputBox';
-import TodoList from '..components/TodoList';
-import DoneList from '..components/DoneList';
+import InputBox from '../components/InputBox'
+import TodoList from '../components/TodoList'
+import DoneList from '../components/DoneList'
 import './TodoList.css';
 
-function TodoList() {
+function Misson1() {
   const [plan, setPlan] = useState('');
   const [todoList, setTodoList] = useState([]);
   const [doneList, setDoneList] = useState([]);
@@ -48,4 +48,4 @@ function TodoList() {
   );
 }
 
-export default TodoList;
+export default Misson1;
