@@ -1,7 +1,9 @@
 // TodoList.jsx
-
 import React, { useState } from 'react';
-import './TodoList.css'; // CSS 파일 임포트 시 파일명이 대소문자가 정확하게 일치해야 함
+import InputBox from '..components/InputBox';
+import TodoList from '..components/TodoList';
+import DoneList from '..components/DoneList';
+import './TodoList.css';
 
 function TodoList() {
   const [plan, setPlan] = useState('');
@@ -37,40 +39,10 @@ function TodoList() {
   return (
     <div className="plan">
       <h1>UMC Study Plan</h1>
-      <div className="input-box">
-        <input
-          type="text"
-          className="input"
-          placeholder="스터디 계획을 작성해보세요!"
-          value={plan}
-          onChange={handlePlanChange}
-          onKeyPress={handleAddTodo}
-        />
-      </div>
-
+      <InputBox value={plan} onChange={handlePlanChange} onKeyPress={handleAddTodo} />
       <div className="lists">
-        <div className="todolist">
-          <h2>해야할 일</h2>
-          <ul>
-            {todoList.map((item, index) => (
-              <li key={index}>
-                {item}
-                <button onClick={() => handleMoveToDone(index)}>완료</button>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="donelist">
-          <h2>해낸 일</h2>
-          <ul>
-            {doneList.map((item, index) => (
-              <li key={index}>
-                {item}
-                <button onClick={() => handleDeleteDone(index)}>삭제</button>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <TodoList todoList={todoList} onTodoItemClick={handleMoveToDone} />
+        <DoneList doneList={doneList} onDoneItemClick={handleDeleteDone} />
       </div>
     </div>
   );
