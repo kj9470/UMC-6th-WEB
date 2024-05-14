@@ -1,18 +1,17 @@
 import { useEffect } from 'react'
 import { ThemeProvider } from 'styled-components';
+import { Outlet } from 'react-router-dom';
+import Router from './Router';
+import GlobalStyle from './styles/GlobalStyle';
+import theme from './styles/theme';
+import MenuBar from './components/Common/MenuBar';
 
 
 function App() {
   const setScreenSize = () => {
-    // vh 관련
-    const vh = window.innerHeight * 0.01;
-    document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-    // window width 관련
-    const windowWidth =
-      window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-    const maxWidth = Math.min(375, windowWidth);
-    document.documentElement.style.setProperty('--app-max-width', `${maxWidth}px`);
+    // const windowWidth = windowWidth
+    // document.documentElement.style.setProperty('--app-max-width', `${windowWidth}px`);
   };
 
   useEffect(() => {
@@ -26,7 +25,9 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-
+      <GlobalStyle />
+      <MenuBar />
+      <Outlet />
     </ThemeProvider>
   )
 }
