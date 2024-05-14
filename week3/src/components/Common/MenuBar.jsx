@@ -52,7 +52,7 @@ const St = {
         padding: 15px 0;
         white-space: nowrap;
 
-        background: #111111;
+        background: #008080;
         margin: 0 auto;
         position: relative;
 
@@ -67,13 +67,13 @@ const St = {
 
     MenuButton: styled.button`
         flex-shrink: 0;
-        color: #008080;
+        color: #FFFFFF;
         font-size: 17px;
         font-weight: regular;
     `,
 
     Logo: styled.div`
-        color: #008080;
+        color: #FFFFFF;
         margin-left: 1.8rem;
         font-size: 30px;
         font-weight: bold;

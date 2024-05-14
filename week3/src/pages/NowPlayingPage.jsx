@@ -11,7 +11,7 @@ const Body = styled.div`
 
 const MoviesWrapper = styled.div`
   width: 1280px;
-  margin: 20px auto;
+  margin: 0px auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, 200px);
   justify-content: center;
