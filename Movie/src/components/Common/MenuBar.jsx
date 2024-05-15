@@ -1,17 +1,34 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const MenuBar = () => {
+
+    const [buttonText, setButtonText] = useState("로그인");
+    const [buttonColor, setButtonColor] = useState("#FFFFFF");
+
+    const signInButtonClick = () => {
+        if (buttonText === "로그인") {
+            setButtonText("로그아웃");
+            setButtonColor("#FFD400");
+        } else {
+            setButtonText("로그인");
+            setButtonColor("#FFFFFF")
+        }
+    }
+
     return (
         <>
             <St.MenuBarWrapper>
-                <St.Logo>UMC Movie</St.Logo>
+                <Link to='/'>
+                    <St.Logo>UMC Movie</St.Logo>
+                </Link>
                 <St.Menu>
-                    <Link to='/sign-in'>
-                        <St.LI>
-                            <St.MenuButton className='sign-in' >회원가입</St.MenuButton>
-                        </St.LI>
-                    </Link>
+                    <St.LI>
+                        <St.MenuButton className='sign-in' onClick={signInButtonClick} style={{ color: buttonColor }}>
+                            {buttonText}
+                        </St.MenuButton>
+                    </St.LI>
                     <Link to='/popular'>
                         <St.LI>
                             <St.MenuButton className='popular'>Popular</St.MenuButton>
@@ -73,6 +90,7 @@ const St = {
     `,
 
     Logo: styled.div`
+        flex-shrink: 0;
         color: #FFFFFF;
         margin-left: 1.8rem;
         font-size: 30px;
