@@ -1,9 +1,11 @@
 import { useRef } from "react";
 import styled from "styled-components";
+import Welcome from "../components/Main/Welcome";
 
 const Main = () => {
     return (
         <St.MainPageWrapper>
+            <Welcome></Welcome>
         </St.MainPageWrapper>
     );
 };
@@ -17,7 +19,7 @@ const St = {
         flex-direction: column;
         align-items: center;
 
-        background: #123456;
+        background: #000000;
         width: 100%;
     `
 };
