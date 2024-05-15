@@ -52,7 +52,7 @@ const St = {
         padding: 15px 0;
         white-space: nowrap;
 
-        background: #008080;
+        background: #28284b;
         margin: 0 auto;
         position: relative;
 
