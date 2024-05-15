@@ -1,17 +1,17 @@
 import React from 'react'
 import styled from "styled-components";
 
-function Welcome() {
+const Welcome = () => {
   return (
     <>
       <St.WelcomeWrapper>
         <St.Text>환영합니다</St.Text>
       </St.WelcomeWrapper>
     </>
-  )
-}
+  );
+};
 
-export default Welcome
+export default Welcome;
 
 const St = {
   WelcomeWrapper: styled.div`
@@ -19,7 +19,7 @@ const St = {
     margin: 0 auto;
     position: relative;
     display: flex;
-    padding: 200px 0;
+    padding: 100px 0;
     
     justify-content: center;
   `,
@@ -27,7 +27,7 @@ const St = {
   Text: styled.div`
     color: #FFFFFF;
     margin: 0 auto;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
   `
 }

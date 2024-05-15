@@ -6,6 +6,8 @@ const MovieBody = styled.div`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 const MoviePoster = styled.img`
@@ -17,7 +19,7 @@ const MoviePoster = styled.img`
 `;
 
 const MovieInfo = styled.div`
-  padding: 15px;
+  padding: 10px;
   display: flex;
   flex: 1;
   color: white;

@@ -1,12 +1,16 @@
 import { useRef } from "react";
 import styled from "styled-components";
 import Welcome from "../components/Main/Welcome";
+import SearchBox from "../components/Main/SearchBox";
 
 const Main = () => {
     return (
-        <St.MainPageWrapper>
-            <Welcome></Welcome>
-        </St.MainPageWrapper>
+        <>
+            <St.MainPageWrapper>
+                <Welcome />
+                <SearchBox />
+            </St.MainPageWrapper>
+        </>
     );
 };
 
