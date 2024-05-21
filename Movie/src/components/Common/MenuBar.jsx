@@ -73,31 +73,33 @@ export default MenuBar;
 const St = {
     MenuBarWrapper: styled.div`
         display: flex;
-        scrollbar-width: none;
-        overflow-x: auto;
-        flex-shrink: 0;
+        justify-content: space-between;
+        align-items: center;
         width: 100%;
-        padding: 15px 0;
-        white-space: nowrap;
-        background: #28284b;
+        padding: 15px 30px;
+        background: #1d1d42;
         position: relative;
     `,
 
     LI: styled.li`
         display: inline-block;
-        margin-right: 2.8rem;
         list-style-type: none;
+        margin-left: 35px;
+        &:last-child {
+            margin-right: 0;
+        }
     `,
 
     MenuButton: styled.button`
         flex-shrink: 0;
         color: ${({ isActive }) => (isActive ? "#FFD400" : "#FFFFFF")};
         font-size: 17px;
-        font-weight: regular;
+        font-weight: ${({ isActive }) => (isActive ? "bold" : "normal")};
         background: none;
         border: none;
         cursor: pointer;
         outline: none;
+        transition: color 0.3s, font-weight 0.3s;
 
         &:hover {
             color: #FFD400;
@@ -109,11 +111,10 @@ const St = {
         color: #FFFFFF;
         font-size: 30px;
         font-weight: bold;
-        margin-left: 30px;
     `,
 
     Menu: styled.div`
-        position: relative;
-        margin-left: 330px;
+        display: flex;
+        align-items: center;
     `,
 };
