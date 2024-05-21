@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -7,7 +7,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #1d1d42;
+  background-color: rgb(49, 49, 82);
 `;
 
 const Form = styled.form`
@@ -42,10 +42,10 @@ const Button = styled.button`
   margin: 20px 0;
   border: none;
   border-radius: 25px;
-  background-color: #c4c4c4;
+  background-color: ${({ disabled }) => (disabled ? '#c4c4c4' : '#4caf50')};
   color: #fff;
   font-size: 16px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   transition: background-color 0.3s;
 `;
 
@@ -54,7 +54,7 @@ const Footer = styled.div`
   color: #fff;
 `;
 
-const Link = styled.a`
+const StyledLink = styled.a`
   color: #ffd700;
   text-decoration: none;
   margin-left: 10px;
@@ -64,21 +64,143 @@ const Link = styled.a`
   }
 `;
 
+const Error = styled.div`
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
+`;
+
 const SignupForm = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [age, setAge] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    const validateName = (name) => {
+      if (!name.trim()) return "이름을 입력해주세요.";
+      return "";
+    };
+
+    const validateEmail = (email) => {
+      if (!email) return "이메일을 입력해주세요.";
+      if (!email.includes('@')) return "이메일 양식에 맞춰주세요.";
+      return "";
+    };
+
+    const validateAge = (age) => {
+      if (!age) return "나이를 입력해주세요.";
+      const ageNum = parseFloat(age);
+      if (isNaN(ageNum)) return "나이는 숫자로 입력해주세요!";
+      if (ageNum < 0) return "나이는 음수가 될 수 없습니다.";
+      if (!Number.isInteger(ageNum)) return "나이는 소수가 될 수 없습니다.";
+      if (ageNum < 19) return "우리 영화 사이트는 19살 이상만 가입이 가능합니다.";
+      return "";
+    };
+
+    const validatePassword = (password) => {
+      if (!password) return "비밀번호를 입력해주세요.";
+      if (password.length < 4) return "비밀번호는 최소 4자리 이상이어야 합니다.";
+      if (password.length > 12) return "비밀번호는 최대 12자리까지 가능합니다.";
+      if (!/[A-Za-z]/.test(password) || !/[0-9]/.test(password) || !/[!@#$%^&*]/.test(password)) {
+        return "영어, 숫자, 특수문자를 모두 조합해서 비밀번호를 작성해야 합니다.";
+      }
+      return "";
+    };
+
+    const validateConfirmPassword = (confirmPassword) => {
+      if (confirmPassword !== password) return "비밀번호를 다시 입력해주세요!";
+      return "";
+    };
+
+    const nameError = validateName(name);
+    const emailError = validateEmail(email);
+    const ageError = validateAge(age);
+    const passwordError = validatePassword(password);
+    const confirmPasswordError = validateConfirmPassword(confirmPassword);
+
+    setErrors({
+      name: nameError,
+      email: emailError,
+      age: ageError,
+      password: passwordError,
+      confirmPassword: confirmPasswordError,
+    });
+
+  }, [name, email, age, password, confirmPassword]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!errors.name && !errors.email && !errors.age && !errors.password && !errors.confirmPassword) {
+      console.log('Form submitted:', { name, email, age, password, confirmPassword });
+    }
+  };
+
+  const isFormValid = () => {
+    return (
+      !errors.name &&
+      !errors.email &&
+      !errors.age &&
+      !errors.password &&
+      !errors.confirmPassword &&
+      name.trim() &&
+      email &&
+      age &&
+      password &&
+      confirmPassword
+    );
+  };
+
   return (
     <Container>
       <Title>회원가입 페이지</Title>
-      <Form>
-        <Input type="text" placeholder="이름을 입력해주세요" />
-        <Input type="email" placeholder="이메일을 입력해주세요" />
-        <Input type="number" placeholder="나이를 입력해주세요" />
-        <Input type="password" placeholder="비밀번호를 입력해주세요" />
-        <Input type="password" placeholder="비밀번호 확인" />
-        <Button type="submit">제출하기</Button>
+      <Form onSubmit={handleSubmit}>
+        <Input
+          type="text"
+          placeholder="이름을 입력해주세요"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        {errors.name && <Error>{errors.name}</Error>}
+        <Input
+          type="email"
+          placeholder="이메일을 입력해주세요"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        {errors.email && <Error>{errors.email}</Error>}
+        <Input
+          type="number"
+          placeholder="나이를 입력해주세요"
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+        />
+        {errors.age && <Error>{errors.age}</Error>}
+        <Input
+          type="password"
+          placeholder="비밀번호를 입력해주세요"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {errors.password && <Error>{errors.password}</Error>}
+        <Input
+          type="password"
+          placeholder="비밀번호 확인"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
+        {errors.confirmPassword && <Error>{errors.confirmPassword}</Error>}
+        <StyledLink href="/sign-in">
+          <Button type="submit" disabled={!isFormValid()}>
+            제출하기
+          </Button>
+        </StyledLink>
       </Form>
       <Footer>
         이미 아이디가 있으신가요?
-        <Link to="/sign-in">로그인 페이지로 이동하기</Link>
+        <StyledLink href="/sign-in">로그인 페이지로 이동하기</StyledLink>
       </Footer>
     </Container>
   );
