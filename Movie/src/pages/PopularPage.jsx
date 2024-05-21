@@ -10,7 +10,7 @@ const Body = styled.div`
 `;
 
 const MoviesWrapper = styled.div`
-  width: 1280px;
+  width: 100%;
   margin: 0px auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, 200px);
