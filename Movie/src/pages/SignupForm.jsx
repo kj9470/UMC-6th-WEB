@@ -42,15 +42,11 @@ const Button = styled.button`
   margin: 20px 0;
   border: none;
   border-radius: 25px;
-  background-color: #4caf50;
+  background-color: #c4c4c4;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #45a049;
-  }
 `;
 
 const Footer = styled.div`
