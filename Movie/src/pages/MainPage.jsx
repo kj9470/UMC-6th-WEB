@@ -1,10 +1,16 @@
 import { useRef } from "react";
 import styled from "styled-components";
+import Welcome from "../components/Main/Welcome";
+import SearchBox from "../components/Main/SearchBox";
 
 const Main = () => {
     return (
-        <St.MainPageWrapper>
-        </St.MainPageWrapper>
+        <>
+            <St.MainPageWrapper>
+                <Welcome />
+                <SearchBox />
+            </St.MainPageWrapper>
+        </>
     );
 };
 
@@ -17,7 +23,7 @@ const St = {
         flex-direction: column;
         align-items: center;
 
-        background: #123456;
+        background: #000000;
         width: 100%;
     `
 };
