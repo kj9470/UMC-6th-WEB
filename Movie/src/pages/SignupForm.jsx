@@ -42,10 +42,10 @@ const Button = styled.button`
   margin: 20px 0;
   border: none;
   border-radius: 25px;
-  background-color: ${({ disabled }) => (disabled ? '#c4c4c4' : '#4caf50')};
+  background-color: ${({ isValid }) => (isValid ? '#4caf50' : '#c4c4c4')};
   color: #fff;
   font-size: 16px;
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  cursor: ${({ isValid }) => (isValid ? 'pointer' : 'not-allowed')};
   transition: background-color 0.3s;
 `;
 
@@ -77,6 +77,7 @@ const SignupForm = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false); // 폼 제출 상태
 
   // 값들이 변경될 때마다 호출
   useEffect(() => {
@@ -136,6 +137,7 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => { // 이벤트 객체
     e.preventDefault(); // 폼의 제출 막음
+    setIsSubmitted(true); // 버튼 눌렀을 시 에러 메시지 노출
     // 오류 메시지 모두 비어 있는지 확인
     if (!errors.name && !errors.email && !errors.age && !errors.password && !errors.confirmPassword) {
       // 데이터 유효한 경우 출력
@@ -172,36 +174,36 @@ const SignupForm = () => {
           value={name}
           onChange={(e) => setName(e.target.value)} // onChange로 에러메시지 상태 업데이트
         />
-        {errors.name && <Error>{errors.name}</Error>}
+        {isSubmitted && errors.name && <Error>{errors.name}</Error>}
         <Input
           type="email"
           placeholder="이메일을 입력해주세요"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        {errors.email && <Error>{errors.email}</Error>}
+        {isSubmitted && errors.email && <Error>{errors.email}</Error>}
         <Input
           type="number"
           placeholder="나이를 입력해주세요"
           value={age}
           onChange={(e) => setAge(e.target.value)}
         />
-        {errors.age && <Error>{errors.age}</Error>}
+        {isSubmitted && errors.age && <Error>{errors.age}</Error>}
         <Input
           type="password"
           placeholder="비밀번호를 입력해주세요"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {errors.password && <Error>{errors.password}</Error>}
+        {isSubmitted && errors.password && <Error>{errors.password}</Error>}
         <Input
           type="password"
           placeholder="비밀번호 확인"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        {errors.confirmPassword && <Error>{errors.confirmPassword}</Error>}
-        <Button type="submit" disabled={!isFormValid()}>
+        {isSubmitted && errors.confirmPassword && <Error>{errors.confirmPassword}</Error>}
+        <Button type="submit" isValid={isFormValid()}>
           제출하기
         </Button>
       </Form>
