@@ -78,6 +78,7 @@ const SignupForm = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errors, setErrors] = useState({});
 
+  // 값들이 변경될 때마다 호출
   useEffect(() => {
     const validateName = (name) => {
       if (!name.trim()) return "이름을 입력해주세요.";
@@ -115,12 +116,14 @@ const SignupForm = () => {
       return "";
     };
 
+    // 유효성 검사
     const nameError = validateName(name);
     const emailError = validateEmail(email);
     const ageError = validateAge(age);
     const passwordError = validatePassword(password);
     const confirmPasswordError = validateConfirmPassword(confirmPassword);
 
+    // 오류 메시지 업데이트
     setErrors({
       name: nameError,
       email: emailError,
@@ -131,13 +134,19 @@ const SignupForm = () => {
 
   }, [name, email, age, password, confirmPassword]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = (e) => { // 이벤트 객체
+    e.preventDefault(); // 폼의 제출 막음
+    // 오류 메시지 모두 비어 있는지 확인
     if (!errors.name && !errors.email && !errors.age && !errors.password && !errors.confirmPassword) {
-      console.log('Form submitted:', { name, email, age, password, confirmPassword });
+      // 데이터 유효한 경우 출력
+      console.log('폼 데이터:', { name, email, age, password, confirmPassword });
+      window.location.href = '/sign-in';
+    } else {
+      console.log('폼 데이터가 유효하지 않습니다.');
     }
   };
 
+  // 폼 제출 가능 여부 확인
   const isFormValid = () => {
     return (
       !errors.name &&
