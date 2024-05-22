@@ -2,15 +2,19 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
+const StyledLink = styled(Link)`
+  text-decoration: none; 
+`;
+
 const MenuBar = () => {
     const location = useLocation();
 
     return (
         <>
             <St.MenuBarWrapper>
-                <Link to='/'>
+                <StyledLink to='/'>
                     <St.Logo>UMC Movie</St.Logo>
-                </Link>
+                </StyledLink>
                 <St.Menu>
                     <Link to='/signup-form'>
                         <St.LI>
@@ -111,6 +115,7 @@ const St = {
         color: #FFFFFF;
         font-size: 30px;
         font-weight: bold;
+        text-decoration: none;
     `,
 
     Menu: styled.div`
