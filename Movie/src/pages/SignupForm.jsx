@@ -170,7 +170,7 @@ const SignupForm = () => {
           type="text"
           placeholder="이름을 입력해주세요"
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)} // onChange로 에러메시지 상태 업데이트
         />
         {errors.name && <Error>{errors.name}</Error>}
         <Input
@@ -201,11 +201,9 @@ const SignupForm = () => {
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
         {errors.confirmPassword && <Error>{errors.confirmPassword}</Error>}
-        <StyledLink href="/sign-in">
-          <Button type="submit" disabled={!isFormValid()}>
-            제출하기
-          </Button>
-        </StyledLink>
+        <Button type="submit" disabled={!isFormValid()}>
+          제출하기
+        </Button>
       </Form>
       <Footer>
         이미 아이디가 있으신가요?
