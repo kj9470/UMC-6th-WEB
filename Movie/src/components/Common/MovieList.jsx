@@ -1,4 +1,5 @@
 import { forwardRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -50,8 +51,15 @@ const StarIcon = styled.span`
 
 const MovieList = forwardRef(({ movie }, ref) => {
   const { poster_path, title, vote_average } = movie;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    const movieTitle = encodeURIComponent(title);
+    navigate(`/movie/${movieTitle}`);
+  };
+
   return (
-    <MovieBody ref={ref}>
+    <MovieBody ref={ref} onClick={handleClick}>
       <MoviePoster
         src={`https://image.tmdb.org/t/p/w500${poster_path}`}
         alt={title}
