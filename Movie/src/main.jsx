@@ -9,7 +9,8 @@ import PopularPage from './pages/PopularPage';
 import TopRatedPage from './pages/TopRatedPage';
 import UpComing from './pages/UpComing';
 import SignupForm from './pages/SignupForm.jsx';
-import MovieDetailPage from './pages/MovieDetailPage.jsx'; // 영화 상세 페이지 컴포넌트 추가
+import MovieDetailPage from './pages/MovieDetailPage.jsx';
+import NotFoundPage from './components/Common/NotFoundPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -45,8 +46,12 @@ const router = createBrowserRouter([
         element: <SignupForm />,
       },
       {
-        path: '/movie/:title', // 영화 상세 페이지 라우팅 추가
+        path: '/movie/:title', // 영화 상세 페이지 
         element: <MovieDetailPage />,
+      },
+      {
+        path: '*', // 모든 잘못된 경로
+        element: <NotFoundPage />,
       },
     ],
   },
