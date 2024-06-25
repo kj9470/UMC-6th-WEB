@@ -26,6 +26,16 @@ const MenuBar = () => {
                             </St.MenuButton>
                         </St.LI>
                     </Link>
+                    <Link to='/sign-in'>
+                        <St.LI>
+                            <St.MenuButton
+                                className='sign-in'
+                                isActive={location.pathname === '/sign-in'}
+                            >
+                                로그인
+                            </St.MenuButton>
+                        </St.LI>
+                    </Link>
                     <Link to='/popular'>
                         <St.LI>
                             <St.MenuButton
