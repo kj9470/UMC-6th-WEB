@@ -72,6 +72,7 @@ const Error = styled.div`
 
 const SignupForm = () => {
   const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
   const [password, setPassword] = useState('');
@@ -83,6 +84,11 @@ const SignupForm = () => {
   useEffect(() => {
     const validateName = (name) => {
       if (!name.trim()) return "이름을 입력해주세요.";
+      return "";
+    };
+
+    const validateUsername = (username) => {
+      if (!username.trim()) return "아이디를 입력해주세요.";
       return "";
     };
 
@@ -119,6 +125,7 @@ const SignupForm = () => {
 
     // 유효성 검사
     const nameError = validateName(name);
+    const usernameError = validateUsername(username);
     const emailError = validateEmail(email);
     const ageError = validateAge(age);
     const passwordError = validatePassword(password);
@@ -127,21 +134,22 @@ const SignupForm = () => {
     // 오류 메시지 업데이트
     setErrors({
       name: nameError,
+      username: usernameError,
       email: emailError,
       age: ageError,
       password: passwordError,
       confirmPassword: confirmPasswordError,
     });
 
-  }, [name, email, age, password, confirmPassword]);
+  }, [name, username, email, age, password, confirmPassword]);
 
   const handleSubmit = (e) => { // 이벤트 객체
     e.preventDefault(); // 폼의 제출 막음
     setIsSubmitted(true); // 버튼 눌렀을 시 에러 메시지 노출
     // 오류 메시지 모두 비어 있는지 확인
-    if (!errors.name && !errors.email && !errors.age && !errors.password && !errors.confirmPassword) {
+    if (!errors.name && !errors.username && !errors.email && !errors.age && !errors.password && !errors.confirmPassword) {
       // 데이터 유효한 경우 출력
-      console.log('폼 데이터:', { name, email, age, password, confirmPassword });
+      console.log('폼 데이터:', { name, username, email, age, password, confirmPassword });
       window.location.href = '/sign-in';
     } else {
       console.log('폼 데이터가 유효하지 않습니다.');
@@ -152,11 +160,13 @@ const SignupForm = () => {
   const isFormValid = () => {
     return (
       !errors.name &&
+      !errors.username &&
       !errors.email &&
       !errors.age &&
       !errors.password &&
       !errors.confirmPassword &&
       name.trim() &&
+      username.trim() &&
       email &&
       age &&
       password &&
@@ -175,6 +185,13 @@ const SignupForm = () => {
           onChange={(e) => setName(e.target.value)} // onChange로 에러메시지 상태 업데이트
         />
         {isSubmitted && errors.name && <Error>{errors.name}</Error>}
+        <Input
+          type="text"
+          placeholder="아이디를 입력해주세요"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        {isSubmitted && errors.username && <Error>{errors.username}</Error>}
         <Input
           type="email"
           placeholder="이메일을 입력해주세요"
