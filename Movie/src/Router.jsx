@@ -7,6 +7,7 @@ import NowPlaying from './pages/NowPlayingPage';
 import Popular from './pages/PopularPage';
 import TopRated from './pages/TopRatedPage';
 import UpComing from './pages/UpComing';
+import SignupForm from "./pages/SignupForm";
 
 const Router = () => {
     return (
@@ -19,6 +20,7 @@ const Router = () => {
                     <Route path="/popular" element={<Popular />} />
                     <Route path="/top-rated" element={<TopRated />} />
                     <Route path="/up-coming" element={<UpComing />} />
+                    <Route path="/signup-form" element={<SignupForm />} />
                 </Routes>
             </Suspense>
         </BrowserRouter>

@@ -8,6 +8,7 @@ import NowPlayingPage from './pages/NowPlayingPage';
 import PopularPage from './pages/PopularPage';
 import TopRatedPage from './pages/TopRatedPage';
 import UpComing from './pages/UpComing';
+import SignupForm from './pages/SignupForm.jsx';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: '/up-coming',
         element: <UpComing />,
+      },
+      {
+        path: '/signup-form',
+        element: <SignupForm />,
       },
     ],
   },

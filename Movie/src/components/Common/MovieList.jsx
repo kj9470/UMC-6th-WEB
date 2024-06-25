@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 
 const MovieBody = styled.div`
+  width: 210px;
+  height: 350px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -14,8 +16,8 @@ const MoviePoster = styled.img`
   width: 100%;
   height: 75%;
   margin: 0;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 `;
 
 const MovieInfo = styled.div`
@@ -32,7 +34,7 @@ const MovieInfo = styled.div`
 const MovieTitle = styled.div`
   width: 80%;
   box-sizing: border-box;
-  word-wrap: break-word; /* 수정: text-wrap → word-wrap */
+  word-wrap: break-word;
 `;
 
 const MovieVoteAverage = styled.div`
@@ -40,21 +42,26 @@ const MovieVoteAverage = styled.div`
   margin-left: 16px;
 `;
 
-const MovieList = (movie) => {
+const StarIcon = styled.span`
+  color: #FFD700;
+  margin-right: 5px;
+`;
+
+const MovieList = forwardRef(({ movie }, ref) => {
   const { poster_path, title, vote_average } = movie;
   return (
-    <MovieBody>
+    <MovieBody ref={ref}>
       <MoviePoster
         src={`https://image.tmdb.org/t/p/w500${poster_path}`}
         alt={title}
       />
       <MovieInfo>
         <MovieTitle>{title}</MovieTitle>
-        <MovieVoteAverage>{vote_average}</MovieVoteAverage>
+        <MovieVoteAverage><StarIcon>★</StarIcon>{vote_average}</MovieVoteAverage>
       </MovieInfo>
     </MovieBody>
   );
-};
+});
 
 export default MovieList;
 
