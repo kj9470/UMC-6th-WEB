@@ -11,27 +11,15 @@ const Body = styled.div`
 `;
 
 const MoviesWrapper = styled.div`
-  width: 900px;
+  width: 100%;
   margin: 0 auto;
   padding-top: 30px;
   padding-bottom: 30px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, 210px); 
   justify-content: center;
-  gap: 24px;
   flex-wrap: wrap;
-
-  @media (max-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @media (max-width: 480px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
+  gap: 20px;
 `;
 
 const options = {
