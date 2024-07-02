@@ -1,3 +1,4 @@
+// src/pages/NowPlayingPage.jsx
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import MovieList from '../components/Common/MovieList';
@@ -15,17 +16,29 @@ const MoviesWrapper = styled.div`
   padding-top: 30px;
   padding-bottom: 30px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); // 항상 4개의 열을 가지도록 설정
+  grid-template-columns: repeat(4, 1fr);
   justify-content: center;
   gap: 24px;
   flex-wrap: wrap;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 const options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1MmU2M2Q4Y2I5ODlmOWRmMWMwZDZiMjcwMjUzOWU1YSIsInN1YiI6IjY2NDM5MjM4YWFkOTI4NzA1MTY5NDY2OCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.XWAil1wXLZkUHxXjfAA7-m9-sLbFTP8Iv9hHZlmOCL8',
+    Authorization: 'Bearer YOUR_API_KEY',
   },
 };
 
