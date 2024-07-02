@@ -15,12 +15,10 @@ const MoviesWrapper = styled.div`
   padding-top: 30px;
   padding-bottom: 30px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 210px); // 항상 4개의 열을 가지도록 설정
+  grid-template-columns: repeat(auto-fill, 210px); 
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
-
-
 `;
 
 const options = {
