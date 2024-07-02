@@ -1,3 +1,4 @@
+// src/pages/MainPage.jsx
 import styled from "styled-components";
 import Welcome from "../components/Main/Welcome";
 import SearchBox from "../components/Main/SearchBox";
@@ -21,8 +22,16 @@ const St = {
         display: flex;
         flex-direction: column;
         align-items: center;
-
         background: #000000;
         width: 100%;
+        padding: 20px;
+
+        @media (max-width: 768px) {
+            padding: 10px;
+        }
+
+        @media (max-width: 480px) {
+            padding: 5px;
+        }
     `
 };
