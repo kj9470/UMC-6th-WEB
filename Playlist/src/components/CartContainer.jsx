@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import CartItem from './CartItem';
-import { clearCart, calculateTotals } from '../cartSlice';
+import { clearCart, calculateTotals, fetchCartItems } from '../cartSlice';
+import LoadingSpinner from './LoadingSpinner';
 
 const Container = styled.div`
   max-width: 800px;
@@ -19,14 +20,18 @@ const Header = styled.h2`
 const ItemList = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 15px;
 `;
 
 const TotalContainer = styled.div`
   margin-top: 20px;
+  text-align: right;
 `;
 
 const Total = styled.p`
+  margin: 5px 0;
   font-size: 18px;
+  text-align: right;
 `;
 
 const ClearButton = styled.button`
@@ -43,14 +48,16 @@ const ClearButton = styled.button`
 `;
 
 const CartContainer = () => {
-  const cartItems = useSelector(state => state.cart.items);
-  const totalAmount = useSelector(state => state.cart.totalAmount);
-  const totalCount = useSelector(state => state.cart.totalCount);
+  const { items, totalAmount, totalCount, status, error } = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(fetchCartItems());
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(calculateTotals());
-  }, [cartItems, dispatch]);
+  }, [items, dispatch]);
 
   const handleClearCart = () => {
     if (window.confirm("담아두신 모든 음반을 삭제하시겠습니까?")) {
@@ -58,11 +65,19 @@ const CartContainer = () => {
     }
   };
 
+  if (status === 'loading') {
+    return <LoadingSpinner />;
+  }
+
+  if (status === 'failed') {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <Container>
       <Header>당신이 선택한 음반</Header>
       <ItemList>
-        {cartItems.map(item => (
+        {items.map(item => (
           <CartItem key={item.id} {...item} />
         ))}
       </ItemList>
