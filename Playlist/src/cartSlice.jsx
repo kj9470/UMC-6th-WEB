@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // 서버통신
-export const fetchCartItems = createAsyncThunk('cart/fetchCartItems', async () => {
+export const fetchCartItems = createAsyncThunk('cart/fetchCartItems', async (_, thunkAPI) => {
   try {
     const response = await fetch('http://localhost:8080/musics');
     if (!response.ok) {
@@ -11,7 +11,7 @@ export const fetchCartItems = createAsyncThunk('cart/fetchCartItems', async () =
     console.log(data);
     return data;
   } catch (error) {
-    throw error;
+    throw thunkAPI.rejectWithValue(error.message);
   }
 });
 
@@ -71,7 +71,8 @@ const cartSlice = createSlice({
       })
       .addCase(fetchCartItems.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.error.message;
+        state.error = action.payload;
+        alert(action.payload); // 에러 메시지 alert
       });
   },
 });
