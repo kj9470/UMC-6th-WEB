@@ -1,4 +1,6 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const MovieBody = styled.div`
@@ -49,8 +51,15 @@ const StarIcon = styled.span`
 
 const MovieList = forwardRef(({ movie }, ref) => {
   const { poster_path, title, vote_average } = movie;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    const movieTitle = encodeURIComponent(title);
+    navigate(`/movie/${movieTitle}`);
+  };
+
   return (
-    <MovieBody ref={ref}>
+    <MovieBody ref={ref} onClick={handleClick}>
       <MoviePoster
         src={`https://image.tmdb.org/t/p/w500${poster_path}`}
         alt={title}
@@ -63,5 +72,14 @@ const MovieList = forwardRef(({ movie }, ref) => {
   );
 });
 
-export default MovieList;
+MovieList.displayName = 'MovieList';
 
+MovieList.propTypes = {
+  movie: PropTypes.shape({
+    poster_path: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    vote_average: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
+export default MovieList;

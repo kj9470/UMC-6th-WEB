@@ -10,14 +10,15 @@ const Body = styled.div`
 `;
 
 const MoviesWrapper = styled.div`
-  width: 900px;
+  width: 100%;
   margin: 0 auto;
   padding-top: 30px;
   padding-bottom: 30px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); // 항상 4개의 열을 가지도록 설정
+  grid-template-columns: repeat(auto-fill, 210px); 
   justify-content: center;
   flex-wrap: wrap;
+  gap: 20px;
 `;
 
 const options = {
